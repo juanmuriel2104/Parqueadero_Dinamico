@@ -4,6 +4,9 @@
 #include "Parqueadero.h"
 %}
 
+// Esto le dice a SWIG cómo convertir std::string <-> str de Python
+%include "std_string.i"
+
 // Exponer el struct Celda
 struct Celda {
     int id;
