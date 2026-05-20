@@ -21,3 +21,19 @@ void imprimirEstado(const Parqueadero& p) {
               << " / " << p.getTotalCeldas() << "\n";
     std::cout << "================================\n\n";
 }
+
+int main() {
+    Parqueadero parqueadero(10);
+
+    // Callback: se ejecuta cada vez que hay un evento
+    auto callback = [&](std::string placa, std::string hora, int celda, std::string accion) {
+        std::cout << "[" << hora << "] ";
+        if (accion == "ENTRADA") {
+            std::cout << "ENTRADA  - Placa: " << placa << " -> Celda " << celda << "\n";
+        } else if (accion == "SALIDA") {
+            std::cout << "SALIDA   - Placa: " << placa << "\n";
+        } else if (accion == "LLENO") {
+            std::cout << "LLENO    - Placa: " << placa << " no pudo entrar\n";
+        }
+        imprimirEstado(parqueadero);
+    };
