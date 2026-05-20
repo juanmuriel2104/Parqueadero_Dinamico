@@ -11,7 +11,23 @@ GeneradorPlacas::GeneradorPlacas(Parqueadero& parqueadero,
 }
  
 std::string GeneradorPlacas::generarPlacaAleatoria() {
-    // Formato colombiano: ABC-123
+    // Formato: ABC-123
     // Pool pequeño de letras para aumentar probabilidad de repetición (simula salidas)
     const std::string letras = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
     const std::string digitos = "0123456789";
+
+    // Usamos un pool reducido para que haya repeticiones y se simulen salidas
+    const int POOL_LETRAS = 8;
+    const int POOL_DIGITOS = 5;
+ 
+    std::string placa = "";
+    placa += letras[std::rand() % POOL_LETRAS];
+    placa += letras[std::rand() % POOL_LETRAS];
+    placa += letras[std::rand() % POOL_LETRAS];
+    placa += "-";
+    placa += digitos[std::rand() % POOL_DIGITOS];
+    placa += digitos[std::rand() % POOL_DIGITOS];
+    placa += digitos[std::rand() % POOL_DIGITOS];
+ 
+    return placa;
+}
