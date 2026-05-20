@@ -9,3 +9,6 @@
 #include <netinet/in.h>
 #include <unistd.h>
 #include "Parqueadero.h"
+
+#define PUERTO 5000
+#define BUFFER_SIZE 1024
