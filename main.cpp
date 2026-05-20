@@ -37,3 +37,20 @@ int main() {
         }
         imprimirEstado(parqueadero);
     };
+
+
+    GeneradorPlacas generador(parqueadero, callback);
+
+    std::cout << "=== Sistema de Parqueadero - Fase 1 ===\n";
+    std::cout << "Generando placas... (Ctrl+C para detener)\n\n";
+
+    // Loop principal: genera una placa cada 2 o 5 segundos (aleatorio)
+    while (true) {
+        generador.tick();
+
+        int espera = (std::rand() % 2 == 0) ? 2 : 5;
+        std::this_thread::sleep_for(std::chrono::seconds(espera));
+    }
+
+    return 0;
+}
