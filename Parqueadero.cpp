@@ -20,3 +20,35 @@ int Parqueadero::registrarPlaca(const std::string& placa, const std::string& hor
     }
     return -1; // Parqueadero lleno
 }
+
+bool Parqueadero::liberarPlaca(const std::string& placa) {
+    auto it = placaACelda.find(placa);
+    if (it == placaACelda.end()) return false;
+ 
+    int id = it->second;
+    celdas[id].ocupada     = false;
+    celdas[id].placa       = "";
+    celdas[id].horaEntrada = "";
+    placaACelda.erase(it);
+    return true;
+}
+ 
+bool Parqueadero::placaExiste(const std::string& placa) const {
+    return placaACelda.count(placa) > 0;
+}
+ 
+std::vector<Celda> Parqueadero::getEstado() const {
+    return celdas;
+}
+ 
+int Parqueadero::getCeldasLibres() const {
+    int libres = 0;
+    for (const auto& c : celdas) {
+        if (!c.ocupada) libres++;
+    }
+    return libres;
+}
+ 
+int Parqueadero::getTotalCeldas() const {
+    return totalCeldas;
+}
