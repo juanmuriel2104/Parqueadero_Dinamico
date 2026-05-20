@@ -45,5 +45,20 @@ class ClienteSocket:
     def desconectar(self):
         if self.sock:
             self.sock.close()
+# ─────────────────────────────────────────────
+# Ventana principal
+# ─────────────────────────────────────────────
+class App:
+    def __init__(self, root):
+        self.root = root
+        self.root.title("Sistema de Parqueadero")
+        self.root.resizable(False, False)
+        self.root.configure(bg="#1e1e2e")
  
+        self.cliente = ClienteSocket()
+        self.celdas_widgets = []  # botones de cada celda
+        self.estado_celdas = {}   # id -> {"ocupada": bool, "placa": str, "hora": str}
+ 
+        self._construir_ui()
+        self._conectar()
  
