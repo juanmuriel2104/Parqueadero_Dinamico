@@ -103,3 +103,47 @@ g++ -std=c++17 -shared -fPIC -o _parqueadero_lib.so \
 ./servidor                  # Terminal 1
 python3 visualizador.py     # Terminal 2
 ```
+
+
+### Windows
+
+```bat
+:: 1. Compilar servidor
+g++ -std=c++17 -o servidor.exe main.cpp Parqueadero.cpp GeneradorPlacas.cpp -lws2_32
+
+:: 2. Compilar librería SWIG
+swig -c++ -python parqueadero_lib.i
+g++ -std=c++17 -shared -o _parqueadero_lib.pyd parqueadero_lib_wrap.cxx ^
+    Parqueadero.cpp GeneradorPlacas.cpp ^
+    -I"C:\Users\...\Python314\include" ^
+    -L"C:\Users\...\Python314\libs" -lpython314
+
+:: 3. Correr el sistema (dos terminales)
+servidor.exe                :: Terminal 1
+python visualizador.py      :: Terminal 2
+```
+
+---
+
+## Uso del visualizador
+
+1. Inicia el servidor C++ primero
+2. Ejecuta el visualizador Python
+3. La grilla muestra las 10 celdas del parqueadero:
+   - **Verde** = celda libre
+   - **Rojo** = celda ocupada (muestra placa y hora de entrada)
+4. **Registrar Entrada**: ingresa la placa y selecciona una celda libre
+5. **Registrar Salida**: selecciona la placa del vehículo que sale
+6. **Actualizar**: refresca el estado consultando al servidor
+
+---
+
+## Ramas Git
+
+| Rama | Contenido |
+|---|---|
+| `main` | Código estable e integrado |
+| `fase1` | Clases base C++ (Parqueadero, GeneradorPlacas) |
+| `fase2` | Servidor socket TCP |
+| `fase3` | Librería dinámica SWIG |
+| `fase4` | Visualizador GUI Python |
