@@ -88,3 +88,18 @@ Parqueadero_Dinamico/
 ## compilación y ejecución
 
 ### Linux / GitHub Codespaces
+
+```bash
+# 1. Compilar servidor
+g++ -std=c++17 -o servidor main_linux.cpp Parqueadero.cpp GeneradorPlacas.cpp
+
+# 2. Compilar librería SWIG
+swig -c++ -python parqueadero_lib.i
+g++ -std=c++17 -shared -fPIC -o _parqueadero_lib.so \
+    parqueadero_lib_wrap.cxx Parqueadero.cpp GeneradorPlacas.cpp \
+    $(python3-config --includes) $(python3-config --ldflags)
+
+# 3. Correr el sistema (dos terminales)
+./servidor                  # Terminal 1
+python3 visualizador.py     # Terminal 2
+```
