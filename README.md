@@ -42,34 +42,17 @@ La comunicación entre C++ y Python también se realiza mediante una **librería
 
 ```
 Parqueadero_Dinamico/
-├── Parqueadero.h           # Clase que gestiona las celdas
-├── Parqueadero.cpp
-├── GeneradorPlacas.h       # Generador de placas aleatorias
-├── GeneradorPlacas.cpp
-├── main.cpp                # Servidor TCP (Windows - Winsock)
-├── main_linux.cpp          # Servidor TCP (Linux - POSIX)
-├── parqueadero_lib.i       # Interfaz SWIG
-├── visualizador.py         # Visualizador GUI en Python
-└── README.md
+- Parqueadero.h           # Clase que gestiona las celdas
+- Parqueadero.cpp
+- GeneradorPlacas.h       # Generador de placas aleatorias
+- GeneradorPlacas.cpp
+- main.cpp                # Servidor TCP (Windows - Winsock)
+- main_linux.cpp          # Servidor TCP (Linux - POSIX)
+- parqueadero_lib.i       # Interfaz SWIG
+- visualizador.py         # Visualizador GUI en Python
+- README.md
 ```
 
----
-
-## Protocolo de comunicación (socket TCP)
-
-| Python envía | C++ responde |
-|---|---|
-| `ENTRADA\|ABC-123\|3` | `OK\|ABC-123\|10:35:42\|3` |
-| `SALIDA\|ABC-123` | `OK\|ABC-123` |
-| `ESTADO` | `CELDA\|0\|LIBRE`, `CELDA\|1\|OCUPADA\|XYZ-999\|10:30:00`, ... |
-
-**Errores posibles:**
-- `ERROR|PLACA_YA_EXISTE`
-- `ERROR|CELDA_OCUPADA`
-- `ERROR|PLACA_NO_EXISTE`
-- `ERROR|FORMATO_INCORRECTO`
-
----
 
 ## Requisitos
 
