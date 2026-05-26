@@ -173,28 +173,10 @@ g++ -std=c++17 -o servidor.exe main.cpp Parqueadero.cpp -lws2_32
 
 ## Paso 7 — Compilar la librería SWIG
 
-Primero verifica la ruta donde está instalado Python en este PC:
 
 ```
-python -c "import sys; print(sys.prefix)"
+g++ -std=c++17 -shared -o _parqueadero_lib.pyd parqueadero_lib_wrap.cxx Parqueadero.cpp -I"C:\Users\JUAN DIEGO MURIEL\AppData\Local\Python\pythoncore-3.14-64\Include" -L"C:\Users\JUAN DIEGO MURIEL\AppData\Local\Python\pythoncore-3.14-64\libs" -lpython314
 ```
-
-Copia la ruta que te muestra (ejemplo: `C:\Users\usuario\AppData\Local\Programs\Python\Python314`)
-y úsala en el siguiente comando reemplazando `TU_RUTA_PYTHON`:
-
-```
-swig -c++ -python parqueadero_lib.i
-```
-
-```
-g++ -std=c++17 -shared -o _parqueadero_lib.pyd parqueadero_lib_wrap.cxx Parqueadero.cpp -I"TU_RUTA_PYTHON\include" -L"TU_RUTA_PYTHON\libs" -lpython314
-```
-
-> El número `314` al final de `-lpython314` corresponde a la versión de Python.
-> Si el Python es 3.12, usa `-lpython312`. Si es 3.11, usa `-lpython311`.
-> Puedes verificarlo con `python --version`.
-
-Si no hay mensajes de error, el archivo `_parqueadero_lib.pyd` fue creado correctamente.
 
 ---
 
